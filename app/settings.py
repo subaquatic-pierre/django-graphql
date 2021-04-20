@@ -13,7 +13,10 @@ SECRET_KEY = "django-insecure-eixw1kj0n)xonxjv%d=^axe31x)j7cp)p!e&p89wk^4a9&37)l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CSRF_COOKIE_NAME = "csrftoken"
 
 
 # Application definition
@@ -26,6 +29,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "graphene_django",
+    "corsheaders",
     "app.core",
     "app.graphql",
 ]
@@ -33,6 +37,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -58,13 +63,15 @@ TEMPLATES = [
     },
 ]
 
+APPEND_SLASH = False
+
 WSGI_APPLICATION = "app.wsgi.application"
 
-GRAPHENE = {"SCHEMA": "app.graphql.schema.schema"}
-
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+GRAPHENE = {
+    "SCHEMA": "app.graphql.schema.schema",
+    "SCHEMA_OUTPUT": "graphql/schema.graphql",  # defaults to schema.json,
+    "SCHEMA_INDENT": 2,  # Defaults to None (displays all data on a single line)
+}
 
 DATABASES = {
     "default": {
@@ -72,10 +79,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -86,27 +89,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
-
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
+# Static files
 STATIC_URL = "/static/"
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
