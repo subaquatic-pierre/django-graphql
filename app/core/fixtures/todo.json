@@ -1,0 +1,56 @@
+[
+  {
+    "model": "core.todo",
+    "pk": 1,
+    "fields": {
+      "title": "Create New world",
+      "content": "Create the most amazing new world with rainbows",
+      "completed": false
+    }
+  },
+  {
+    "model": "core.todo",
+    "pk": 2,
+    "fields": {
+      "title": "Scuba Dive",
+      "content": "We have to go underwater to see the fish",
+      "completed": false
+    }
+  },
+  {
+    "model": "core.todo",
+    "pk": 3,
+    "fields": {
+      "title": "Sail The world",
+      "content": "Get a sail boat and sail around the whole world",
+      "completed": false
+    }
+  },
+  {
+    "model": "core.todo",
+    "pk": 4,
+    "fields": {
+      "title": "Make coffee",
+      "content": "Create the most delicious cup of coffee anyone has had",
+      "completed": false
+    }
+  },
+  {
+    "model": "core.todo",
+    "pk": 5,
+    "fields": {
+      "title": "Do Washing",
+      "content": "Clean all of the washing for everyone in the whole world",
+      "completed": false
+    }
+  },
+  {
+    "model": "core.todo",
+    "pk": 6,
+    "fields": {
+      "title": "Fly to the moon",
+      "content": "Ge on the next space shuttle and fly to the moon",
+      "completed": true
+    }
+  }
+]
