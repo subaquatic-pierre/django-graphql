@@ -13,6 +13,6 @@ class TodoQueries(graphene.ObjectType):
         return todo
 
     def resolve_todos(self, info):
-        todos = Todo.objects.all()
+        todos = Todo.objects.all().order_by("id").reverse()
 
         return todos
