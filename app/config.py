@@ -19,17 +19,16 @@ def get_bool_from_env(name, default_value):
     return default_value
 
 
-dev_env = get_bool_from_env("DEV_ENV", False)
-
-with open(os.path.join(Path.home(), "etc/django-graphql/config.json"), "r") as f:
-    config = json.load(f)
-
-
 class Config:
     pass
 
 
+dev_env = get_bool_from_env("DEV_ENV", False)
+
 if dev_env:
+    with open(os.path.join(Path.home(), "etc/django-graphql/config.json"), "r") as f:
+        config = json.load(f)
+
     Config.DEBUG = True
     Config.SECRET_KEY = "supersecretkey"
     Config.DB_NAME = config.get("DB_NAME")

@@ -1,12 +1,16 @@
 from pathlib import Path
-from .config import Config
 
-config = Config()
+# from .config import Config
+
+# config = Config()
+config = {}
 
 BASE_DIR = Path(__file__).resolve().parent
-SECRET_KEY = config.SECRET_KEY
-DEBUG = config.DEBUG
+# SECRET_KEY = config.SECRET_KEY
+# DEBUG = config.DEBUG
 ROOT_URLCONF = "app.urls"
+SECRET_KEY = "something"
+DEBUG = True
 APPEND_SLASH = False
 WSGI_APPLICATION = "app.wsgi.application"
 

@@ -2,7 +2,8 @@ FROM python:3.8-slim
 
 RUN apt-get -y update \
     && apt-get install -y \
-    gettest \
+    apt-utils \
+    gcc \
     libxml2 \
     libssl1.1 \
     libcairo2 \
@@ -34,10 +35,10 @@ ENV AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY"
 # ------
 
 # Install Python dependencies
+COPY ./requirements.txt /app/
+RUN pip install -r /app/requirements.txt
 COPY . /app/
 WORKDIR /app
-RUN pip install -r requirements.txt
 
-EXPOSE 80
-
-CMD ["uwsgi", "--ini", "/app/wsgi/uwsgi.ini"]
+CMD ["uwsgi", "--ini", "/app/app/wsgi/uwsgi.ini"]
+# CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
