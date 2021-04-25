@@ -74,6 +74,16 @@ TEMPLATES = [
 
 if DEBUG:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+    # DATABASES = {
+    #     "default": {
+    #         "ENGINE": "django.db.backends.postgresql",
+    #         "NAME": "djangoreact",
+    #         "USER": "postgres",
+    #         "PASSWORD": "password",
+    #         "HOST": "django-react.cguhuytcxcub.us-east-1.rds.amazonaws.com",
+    #         "PORT": "5432",
+    #     }
+    # }
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -81,6 +91,7 @@ if DEBUG:
         }
     }
 else:
+    ALLOWED_HOSTS = config.ALLOWED_HOSTS
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
