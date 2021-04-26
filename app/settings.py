@@ -5,7 +5,8 @@ config = Config()
 
 BASE_DIR = Path(__file__).resolve().parent
 SECRET_KEY = config.SECRET_KEY
-DEBUG = config.DEBUG
+# DEBUG = config.DEBUG
+DEBUG = True
 ROOT_URLCONF = "app.urls"
 APPEND_SLASH = False
 WSGI_APPLICATION = "app.wsgi.application"
