@@ -35,6 +35,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 CSRF_COOKIE_NAME = "csrftoken"
 
+CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "https://ballot-online.com"]
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
