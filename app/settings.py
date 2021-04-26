@@ -93,8 +93,9 @@ else:
         ".ballot-online.com",
     ]
     ALLOWED_HOSTS = ["ballot-online.com", "api.ballot-online.com", ".ballot-online.com"]
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https://\w+\.ballot-online\.com$",
+    CORS_ALLOWED_ORIGINS = [
+        "https://ballot-online.com",
+        "https://api.ballot-online.com",
     ]
 
     # Database settings
