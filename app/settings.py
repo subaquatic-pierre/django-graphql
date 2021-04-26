@@ -88,12 +88,8 @@ if DEBUG:
 else:
     # CORS settings
     CORS_ALLOW_ALL_ORIGINS = True
-    CSRF_TRUSTED_ORIGINS = [
-        "ballot-online.com",
-        "api.ballot-online.com",
-        ".ballot-online.com",
-    ]
-    ALLOWED_HOSTS = ["ballot-online.com", "api.ballot-online.com", ".ballot-online.com"]
+    CSRF_TRUSTED_ORIGINS = config.CSRF_TRUSTED_ORIGINS
+    ALLOWED_HOSTS = config.ALLOWED_HOSTS
 
     # Database settings
     DATABASES = {

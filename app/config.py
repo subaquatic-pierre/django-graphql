@@ -38,6 +38,7 @@ if dev_env:
     Config.DB_PORT = config.get("DB_PORT")
     Config.EMAIL_URL = config.get("EMAIL_URL")
     Config.ALLOWED_HOSTS = get_list(config.get("ALLOWED_HOSTS"))
+    Config.CSRF_TRUSTED_ORIGINS = get_list(config.get("CSRF_TRUSTED_ORIGINS"))
     Config.AWS_MEDIA_BUCKET_NAME = config.get("AWS_MEDIA_BUCKET_NAME")
     Config.AWS_STORAGE_BUCKET_NAME = config.get("AWS_STORAGE_BUCKET_NAME")
     Config.AWS_ACCESS_KEY_ID = config.get("AWS_ACCESS_KEY_ID")
