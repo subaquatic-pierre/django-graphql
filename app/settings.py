@@ -30,8 +30,7 @@ INSTALLED_APPS = [
     "app.graphql",
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
-CSRF_COOKIE_NAME = "csrftoken"
+CORS_ALLOW_ALL_ORIGINS = True
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
@@ -48,6 +47,7 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "corsheaders.middleware.CorsPostCsrfMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -70,32 +70,46 @@ TEMPLATES = [
     },
 ]
 
-if DEBUG:
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
-else:
-    ALLOWED_HOSTS = config.ALLOWED_HOSTS
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": config.DB_NAME,
-            "USER": config.DB_USER,
-            "PASSWORD": config.DB_PASSWORD,
-            "HOST": config.DB_HOST,
-            "PORT": config.DB_PORT,
-        }
-    }
+# if DEBUG:
+#     ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.sqlite3",
+#             "NAME": BASE_DIR / "db.sqlite3",
+#         }
+#     }
+# else:
+#     ALLOWED_HOSTS = config.ALLOWED_HOSTS
+#     CSRF_TRUSTED_ORIGINS = ["ballot-online.com", "api.ballot-online.com"]
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.postgresql",
+#             "NAME": config.DB_NAME,
+#             "USER": config.DB_USER,
+#             "PASSWORD": config.DB_PASSWORD,
+#             "HOST": config.DB_HOST,
+#             "PORT": config.DB_PORT,
+#         }
+#     }
 
-    AUTH_PASSWORD_VALIDATORS = [
-        {
-            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-        },
-        {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-        {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-        {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
-    ]
+#     AUTH_PASSWORD_VALIDATORS = [
+#         {
+#             "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+#         },
+#         {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
+#         {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
+#         {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+#     ]
+
+CSRF_TRUSTED_ORIGINS = ["ballot-online.com", "api.ballot-online.com"]
+ALLOWED_HOSTS = ["*"]
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config.DB_NAME,
+        "USER": config.DB_USER,
+        "PASSWORD": config.DB_PASSWORD,
+        "HOST": config.DB_HOST,
+        "PORT": config.DB_PORT,
+    }
+}
