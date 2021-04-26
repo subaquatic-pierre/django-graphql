@@ -53,6 +53,7 @@ else:
     Config.DB_PORT = os.environ.get("DB_PORT")
     Config.EMAIL_URL = os.environ.get("EMAIL_URL")
     Config.ALLOWED_HOSTS = get_list(os.environ.get("ALLOWED_HOSTS"))
+    Config.CSRF_TRUSTED_ORIGINS = get_list(os.environ.get("CSRF_TRUSTED_ORIGINS"))
     Config.AWS_MEDIA_BUCKET_NAME = os.environ.get("AWS_MEDIA_BUCKET_NAME")
     Config.AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
     Config.AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
