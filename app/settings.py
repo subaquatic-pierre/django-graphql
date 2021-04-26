@@ -6,9 +6,11 @@ config = Config()
 BASE_DIR = Path(__file__).resolve().parent
 SECRET_KEY = config.SECRET_KEY
 DEBUG = config.DEBUG
-ROOT_URLCONF = "app.urls"
 APPEND_SLASH = False
+
 WSGI_APPLICATION = "app.wsgi.application"
+ROOT_URLCONF = "app.urls"
+
 
 GRAPHENE = {
     "SCHEMA": "app.graphql.schema.schema",
@@ -29,8 +31,6 @@ INSTALLED_APPS = [
     "app.core",
     "app.graphql",
 ]
-
-CORS_ALLOW_ALL_ORIGINS = True
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
@@ -70,46 +70,48 @@ TEMPLATES = [
     },
 ]
 
-# if DEBUG:
-#     ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.sqlite3",
-#             "NAME": BASE_DIR / "db.sqlite3",
-#         }
-#     }
-# else:
-#     ALLOWED_HOSTS = config.ALLOWED_HOSTS
-#     CSRF_TRUSTED_ORIGINS = ["ballot-online.com", "api.ballot-online.com"]
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.postgresql",
-#             "NAME": config.DB_NAME,
-#             "USER": config.DB_USER,
-#             "PASSWORD": config.DB_PASSWORD,
-#             "HOST": config.DB_HOST,
-#             "PORT": config.DB_PORT,
-#         }
-#     }
+# Check if production or development environment
+if DEBUG:
+    # CORS settings
+    ALLOWED_HOSTS = ["*"]
+    CSRF_TRUSTED_ORIGINS = ["*"]
+    CORS_ALLOW_ALL_ORIGINS = True
 
-#     AUTH_PASSWORD_VALIDATORS = [
-#         {
-#             "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-#         },
-#         {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-#         {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-#         {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
-#     ]
-
-CSRF_TRUSTED_ORIGINS = ["ballot-online.com", "api.ballot-online.com"]
-ALLOWED_HOSTS = ["*"]
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": config.DB_NAME,
-        "USER": config.DB_USER,
-        "PASSWORD": config.DB_PASSWORD,
-        "HOST": config.DB_HOST,
-        "PORT": config.DB_PORT,
+    # Databse settings
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+
+else:
+    # CORS settings
+    CSRF_TRUSTED_ORIGINS = [
+        "ballot-online.com",
+        "api.ballot-online.com",
+        ".ballot-online.com",
+    ]
+    ALLOWED_HOSTS = ["ballot-online.com", "api.ballot-online.com", ".ballot-online.com"]
+
+    # Database settings
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": config.DB_NAME,
+            "USER": config.DB_USER,
+            "PASSWORD": config.DB_PASSWORD,
+            "HOST": config.DB_HOST,
+            "PORT": config.DB_PORT,
+        }
+    }
+
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        },
+        {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
+        {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
+        {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    ]
+
