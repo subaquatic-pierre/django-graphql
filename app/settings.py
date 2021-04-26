@@ -31,11 +31,8 @@ INSTALLED_APPS = [
     "app.graphql",
 ]
 
-CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 CSRF_COOKIE_NAME = "csrftoken"
-
-CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "https://ballot-online.com"]
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
@@ -75,14 +72,20 @@ TEMPLATES = [
 ]
 
 ALLOWED_HOSTS = config.ALLOWED_HOSTS
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "djangoreact",
+#         "USER": "postgres",
+#         "PASSWORD": "password",
+#         "HOST": "django-react.cguhuytcxcub.us-east-1.rds.amazonaws.com",
+#         "PORT": "5432",
+#     }
+# }
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "djangoreact",
-        "USER": "postgres",
-        "PASSWORD": "password",
-        "HOST": "django-react.cguhuytcxcub.us-east-1.rds.amazonaws.com",
-        "PORT": "5432",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
