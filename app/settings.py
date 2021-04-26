@@ -71,61 +71,32 @@ TEMPLATES = [
     },
 ]
 
-ALLOWED_HOSTS = config.ALLOWED_HOSTS
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "djangoreact",
-#         "USER": "postgres",
-#         "PASSWORD": "password",
-#         "HOST": "django-react.cguhuytcxcub.us-east-1.rds.amazonaws.com",
-#         "PORT": "5432",
-#     }
-# }
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if DEBUG:
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+else:
+    ALLOWED_HOSTS = config.ALLOWED_HOSTS
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": config.DB_NAME,
+            "USER": config.DB_USER,
+            "PASSWORD": config.DB_PASSWORD,
+            "HOST": config.DB_HOST,
+            "PORT": config.DB_PORT,
+        }
+    }
 
-# if DEBUG:
-#     # ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-#     ALLOWED_HOSTS = config.ALLOWED_HOSTS
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.postgresql",
-#             "NAME": "djangoreact",
-#             "USER": "postgres",
-#             "PASSWORD": "password",
-#             "HOST": "django-react.cguhuytcxcub.us-east-1.rds.amazonaws.com",
-#             "PORT": "5432",
-#         }
-#     }
-#     # DATABASES = {
-#     #     "default": {
-#     #         "ENGINE": "django.db.backends.sqlite3",
-#     #         "NAME": BASE_DIR / "db.sqlite3",
-#     #     }
-#     # }
-# else:
-#     ALLOWED_HOSTS = config.ALLOWED_HOSTS
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.postgresql",
-#             "NAME": config.DB_NAME,
-#             "USER": config.DB_USER,
-#             "PASSWORD": config.DB_PASSWORD,
-#             "HOST": config.DB_HOST,
-#             "PORT": config.DB_PORT,
-#         }
-#     }
-
-#     AUTH_PASSWORD_VALIDATORS = [
-#         {
-#             "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-#         },
-#         {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-#         {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-#         {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
-#     ]
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        },
+        {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
+        {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
+        {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    ]
